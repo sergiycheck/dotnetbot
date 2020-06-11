@@ -10,11 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using WebAppBot.Models;
-using IApplicationLifetime = Microsoft.AspNetCore.Hosting.IApplicationLifetime;
-using Newtonsoft.Json;
 
-namespace WebAppBot
+namespace HttpTelegBot
 {
     public class Startup
     {
@@ -28,23 +25,18 @@ namespace WebAppBot
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson();
-            
+            services.AddControllers();
         }
 
-        private IHostEnvironment env;
-
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApplicationLifetime lifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            this.env = env;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -54,16 +46,6 @@ namespace WebAppBot
             {
                 endpoints.MapControllers();
             });
-
-            lifetime.ApplicationStopped.Register(OnAppStopped);
-
-            Bot.GetBotClientAsync().Wait();
-        }
-
-        public void OnAppStopped()
-        {
-            if(Bot.BotClient!=null)
-                Bot.BotClient.DeleteWebhookAsync().Wait();
         }
     }
 }

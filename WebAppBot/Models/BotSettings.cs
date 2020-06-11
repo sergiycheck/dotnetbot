@@ -8,7 +8,7 @@ namespace WebAppBot.Models
     public class BotSettings
     {
         public static string Url { get; set; } 
-            = "https://14ce0ade6ac9.ngrok.io/{0}";
+            = "https://52f145576693.ngrok.io/{0}";
         public static string Name { get; set; } 
             = "Serhii_Lab8_RabbitMQ_bot";
         public static string Key { get; set; } 
