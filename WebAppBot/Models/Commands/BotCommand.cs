@@ -7,12 +7,10 @@ using Telegram.Bot.Types;
 
 namespace WebAppBot.Models.Commands
 {
-    public abstract class BotCommand
+    public interface  IBotCommand
     {
-        public abstract string Name { get; }
+        Task Execute(Message message, TelegramBotClient client);
 
-        public abstract Task Execute(Message message, TelegramBotClient client);
-
-        public abstract bool Contains(Message message);
+          bool Contains(Message message);
     }
 }

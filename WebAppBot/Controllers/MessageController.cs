@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,9 @@ namespace WebAppBot.Controllers
     {
 
         [HttpPost]
-        public async Task<OkResult> 
-            Post([FromBody] Update update)
+        public async Task<OkResult> Post([FromBody] Update update)
         {
+            //svar update = new Update(){Message = new Message(){Text = "Text"}};
             if (update == null) return Ok();
 
             var commands = Bot.Commands;
