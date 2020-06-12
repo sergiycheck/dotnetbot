@@ -21,7 +21,9 @@ namespace WebAppBot.Models
 
             commandsList = new List<IBotCommand>();
             commandsList.Add(new StartCommand());
+            commandsList.Add(new PictureCommand());
             commandsList.Add(new ReplyCommand());
+            
             //TODO: Add more commands
 
             
