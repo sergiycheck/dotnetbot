@@ -15,7 +15,7 @@ namespace HttpTelegBot.Controllers
     public class BotController : ControllerBase
     {
         private readonly TelegramBotClient _client
-            = new TelegramBotClient(BotSettings.Key);
+            = new TelegramBotClient("");
 
         [HttpGet]
         public string Get()

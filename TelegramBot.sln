@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppBot", "WebAppBot\WebA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotRequsts", "BotRequsts\BotRequsts.csproj", "{6E388451-C7D2-4E7D-AE04-112F5DFF74A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpTelegBot", "HttpTelegBot\HttpTelegBot.csproj", "{ACDD3EF6-9972-4100-A6AF-2D562903E6A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpTelegBot", "HttpTelegBot\HttpTelegBot.csproj", "{ACDD3EF6-9972-4100-A6AF-2D562903E6A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot.Tests", "Bot.Tests\Bot.Tests.csproj", "{A1880EC2-63A2-4D40-BBB4-97014DB9781B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{ACDD3EF6-9972-4100-A6AF-2D562903E6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACDD3EF6-9972-4100-A6AF-2D562903E6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACDD3EF6-9972-4100-A6AF-2D562903E6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1880EC2-63A2-4D40-BBB4-97014DB9781B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1880EC2-63A2-4D40-BBB4-97014DB9781B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1880EC2-63A2-4D40-BBB4-97014DB9781B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1880EC2-63A2-4D40-BBB4-97014DB9781B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -367,3 +367,5 @@ FodyWeavers.xsd
 *.txt
 
 appsettings.Development.json
+*.jpg
+*.png
