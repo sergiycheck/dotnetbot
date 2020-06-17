@@ -11,18 +11,25 @@ namespace WebAppBot.Models
     public class Bot
     {
         public static TelegramBotClient BotClient;
-        private static List<IBotCommand> commandsList;
-        public static IReadOnlyList<IBotCommand> Commands => commandsList.AsReadOnly();
+        private static List<MyBotCommand> commandsList;
+        public static IReadOnlyList<MyBotCommand> Commands => commandsList.AsReadOnly();
 
         public static async Task<TelegramBotClient> GetBotClientAsync()
         {
             if (BotClient != null) return BotClient;
             
 
-            commandsList = new List<IBotCommand>();
+            commandsList = new List<MyBotCommand>();
             commandsList.Add(new StartCommand());
             commandsList.Add(new PictureCommand());
+            commandsList.Add(new ButtonCommands());
+            commandsList.Add(new InlineButtonReplyCommand());
+            commandsList.Add(new InlineButtonReplyCommandSecond());
+            commandsList.Add(new ReplyButtonCommands());
+            commandsList.Add(new ReplyButtonCommandFirst());
+            commandsList.Add(new ReplyButtonCommandSecond());
             commandsList.Add(new ReplyCommand());
+            
             
             //TODO: Add more commands
 

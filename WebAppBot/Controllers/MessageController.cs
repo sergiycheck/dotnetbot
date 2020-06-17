@@ -5,36 +5,51 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using WebAppBot.Models;
 
 namespace WebAppBot.Controllers
 {
-    [Route("api/message/update")]
+    [Route("api/message")]
     [ApiController]
     public class MessageController : ControllerBase
     {
 
-        [HttpPost]
-        public async Task<OkResult> Post([FromBody] Update update)
-        {
-            //svar update = new Update(){Message = new Message(){Text = "Text"}};
-            if (update == null) return Ok();
 
+        public MessageController()
+        {
+            var task = Task.Run(async()=>await Bot.GetBotClientAsync());
+            task.Wait();
+
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> Post([FromBody] Update update)
+        {
+            if (update == null) return Ok(null);
+            
             var commands = Bot.Commands;
             var message = update.Message;
-            var botClient = await Bot.GetBotClientAsync();
+            var callBack = update.CallbackQuery;
+
 
             foreach (var command in commands)
             {
                 if (command.Contains(message))
                 {
-                    await command.Execute(message, botClient);
-                    break;
+                    return Ok(await command.Execute(message,callBack));
                 }
-            }
 
-            return Ok();
+                if (command.Contains(callBack))
+                {
+                    return Ok(await command.Execute(message, callBack));
+                }
+                
+                
+            }
+            return NotFound();
         }
+
     }
 }

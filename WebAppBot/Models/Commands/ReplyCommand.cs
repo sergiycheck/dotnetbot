@@ -8,21 +8,21 @@ using Telegram.Bot.Types.Enums;
 
 namespace WebAppBot.Models.Commands
 {
-    public class ReplyCommand : IBotCommand
+    public class ReplyCommand : MyBotCommand
     {
-        public string Name => "";//some name to trigger command
+        public override string Name => "";//some name to trigger command
 
-        public bool Contains(Message message)
+        public override bool Contains(Message message)
         {
             if (message == null) return false;
             if (message.Type != MessageType.Text) return false;
             return true;
         }
 
-        public async Task Execute(Message message, TelegramBotClient client)
+        public override async Task<Message> Execute(Message message,CallbackQuery query)
         {
             var chatId = message.Chat.Id;
-            await client.SendTextMessageAsync(chatId, $"Hello {message.Chat.FirstName}", parseMode: ParseMode.Markdown);
+            return await Bot.BotClient.SendTextMessageAsync(chatId, $"Hello {message.Chat.FirstName}", parseMode: ParseMode.Markdown);
         }
     }
 }
