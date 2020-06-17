@@ -1,0 +1,48 @@
+{
+    "update_id": 650786000,
+    "callback_query": {
+        "id": "1809956294748334345",
+        "from": {
+            "id": 421413289,
+            "is_bot": false,
+            "first_name": "Seroga",
+            "last_name": "Kyzmuch",
+            "username": "Sieroga",
+            "language_code": "en"
+        },
+        "message": {
+            "message_id": 185,
+            "from": {
+                "id": 1286361652,
+                "is_bot": true,
+                "first_name": "Serhii_Lab8_RabbitMQ_bot",
+                "username": "Serhii_Lab8_RabbitMQ_bot"
+            },
+            "chat": {
+                "id": 421413289,
+                "first_name": "Seroga",
+                "last_name": "Kyzmuch",
+                "username": "Sieroga",
+                "type": "private"
+            },
+            "date": 1592415858,
+            "text": "Choose first or second",
+            "reply_markup": {
+                "inline_keyboard": [
+                    [
+                        {
+                            "text": "first",
+                            "callback_data": "callback1button"
+                        },
+                        {
+                            "text": "second",
+                            "callback_data": "callback2buttoon"
+                        }
+                    ]
+                ]
+            }
+        },
+        "chat_instance": "-544883151529072168",
+        "data": "callback2buttoon"
+    }
+}
