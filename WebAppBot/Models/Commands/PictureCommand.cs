@@ -19,9 +19,42 @@ namespace WebAppBot.Models.Commands
         public override async Task<Message> Execute(Message message, CallbackQuery query)
         {
             var chatId = message.Chat.Id;
-            string path = "..\\..\\..\\..\\WebAppBot\\Resources\\honda-nsx_1.jpg";
-            string absolutePath = @"E:\filesFromCDisk\TelegramBot\WebAppBot\Resources\honda-nsx_1.jpg";
-            string url2 = "https://source.unsplash.com/random";
+            string relativePath = String.Empty;
+            try
+            {
+                string dir = Directory.GetCurrentDirectory();
+                var counter = 0;
+                for (int i = dir.Length; i > 0; i--)
+                {
+
+                    if (dir[i - 1].Equals('\\'))
+                    {
+                        counter++;
+                        if (counter == 4) break;
+
+                    }
+
+                    dir = dir.Remove(i - 1, 1);
+
+                }
+
+                relativePath = dir + "WebAppBot\\Resources\\honda-nsx_1.jpg";
+                relativePath = relativePath.Replace(@"\", "/");
+                using (FileStream fileStream = File.Open(relativePath, FileMode.Open))
+                {
+                    InputOnlineFile photo = new InputOnlineFile(fileStream);
+                    photo.FileName = Path.GetFileName(relativePath);
+                    if (photo.Content != null) await Bot.BotClient.SendPhotoAsync(chatId, photo, "Car from disk");
+
+                }
+            }
+            catch (Exception e)
+            {
+                //relativePath = "../../../Resources/honda-nsx_1.jpg";
+            }
+
+            
+            string radomPhotoUrl = "https://source.unsplash.com/random";
             string onlyUrl = "https://source.unsplash.com";
             var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(onlyUrl);
@@ -33,14 +66,8 @@ namespace WebAppBot.Models.Commands
                 await Bot.BotClient.SendPhotoAsync(chatId, randomPhoto, " Random Photo from stream ");
             }
 
-            using (FileStream fileStream = File.Open(absolutePath,FileMode.Open))
-            {
-                InputOnlineFile photo = new InputOnlineFile(fileStream);
-                photo.FileName = Path.GetFileName(absolutePath);
-                if(photo.Content!=null) await Bot.BotClient.SendPhotoAsync(chatId, photo, "Car from disk");
-                return await Bot.BotClient.SendPhotoAsync(chatId, url2, "Random photo!");
-            }
 
+            return await Bot.BotClient.SendPhotoAsync(chatId, radomPhotoUrl, "Random photo!");
 
         }
     }
