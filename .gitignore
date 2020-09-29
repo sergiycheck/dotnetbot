@@ -361,8 +361,7 @@ FodyWeavers.xsd
 
 
 *.cer
-*.docx
-*.doc
+
 *.pvk
 *.txt
 

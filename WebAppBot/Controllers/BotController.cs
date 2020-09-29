@@ -19,9 +19,9 @@ namespace WebAppBot.Controllers
             = new TelegramBotClient(BotSettings.Key);
 
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
-            return "Bot working";
+            return Ok("Bot working");
         }
         // POST: api/Bot
         [HttpPost]

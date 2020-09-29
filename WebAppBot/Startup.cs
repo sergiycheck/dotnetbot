@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using WebAppBot.Models;
 using IApplicationLifetime = Microsoft.AspNetCore.Hosting.IApplicationLifetime;
 using Newtonsoft.Json;
+using Microsoft.OpenApi.Models;
 
 namespace WebAppBot
 {
@@ -30,6 +31,27 @@ namespace WebAppBot
         {
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllers().AddNewtonsoftJson();
+
+            services.AddSwaggerGen(SwaggerGenOptionsExtensions=>{
+                    SwaggerGenOptionsExtensions.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "telegram bot API",
+                        Description = "A simple telegram bot ASP.NET Core Web API",
+                        TermsOfService = new Uri("https://example.com/terms"),
+                        Contact = new OpenApiContact
+                        {
+                            Name = "serhii",
+                            Email = string.Empty,
+                            Url = new Uri("https://example.com/name"),
+                        },
+                        License = new OpenApiLicense
+                        {
+                            Name = "Use under LICX",
+                            Url = new Uri("https://example.com/license"),
+                        }
+                    });
+            });
             
         }
 
@@ -39,6 +61,15 @@ namespace WebAppBot
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApplicationLifetime lifetime)
         {
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "telegramBotAPI_V1");
+                c.RoutePrefix = string.Empty;
+            });
             this.env = env;
             if (env.IsDevelopment())
             {
